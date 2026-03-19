@@ -10,10 +10,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Spotify App',
+      title: 'Spotity App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: const Color(0xFF121212),
+        primaryColor: const Color(0xFF1DB954),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF121212),
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.white),
+        ),
         fontFamily: 'Arial',
       ),
       home: const HomePage(),
@@ -28,22 +35,19 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Image.asset(
             'assets/logo.png',
             errorBuilder: (context, error, stackTrace) {
-              return const Icon(Icons.music_note, color: Colors.black);
+              return const Icon(Icons.music_note, color: Colors.white);
             },
           ),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.menu, color: Colors.black),
+            icon: const Icon(Icons.menu),
             onPressed: () {
               // Show menu
             },
@@ -57,18 +61,25 @@ class HomePage extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
-                color: Color(0xFF00D856),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    const Color(0xFF1DB954).withOpacity(0.8),
+                    const Color(0xFF121212),
+                  ],
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Profile and Contact Page',
+                  'Home Page',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 30),
@@ -104,14 +115,6 @@ class HomePage extends StatelessWidget {
                           ],
                         ),
                       );
-                    },
-                  ),
-                  const SizedBox(height: 15),
-                  _buildButton(
-                    context,
-                    'HOME PAGE',
-                    () {
-                      // Already on home page
                     },
                   ),
                 ],
@@ -200,8 +203,7 @@ class HomePage extends StatelessWidget {
           backgroundColor: const Color(0xFF1DB954),
           padding: const EdgeInsets.symmetric(vertical: 20),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-            side: const BorderSide(color: Colors.black, width: 2),
+            borderRadius: BorderRadius.circular(25),
           ),
         ),
         child: Text(
@@ -209,7 +211,7 @@ class HomePage extends StatelessWidget {
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
       ),
@@ -222,6 +224,7 @@ class HomePage extends StatelessWidget {
       onTap: onTap,
       child: Card(
         elevation: 4,
+        color: const Color(0xFF282828),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -239,6 +242,7 @@ class HomePage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
             ],
@@ -256,17 +260,14 @@ class GalleryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.menu, color: Colors.black),
+            icon: const Icon(Icons.menu),
             onPressed: () {},
           ),
         ],
@@ -283,19 +284,19 @@ class GalleryPage extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    const Color(0xFF8BC34A),
-                    const Color(0xFF689F38),
+                    const Color(0xFF1DB954).withOpacity(0.8),
+                    const Color(0xFF121212),
                   ],
                 ),
               ),
               child: Column(
                 children: [
                   const Text(
-                    'Sponttify',
+                    'Spotity',
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -304,7 +305,7 @@ class GalleryPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
-                      color: Colors.white,
+                      color: Colors.grey,
                     ),
                   ),
                 ],
@@ -313,7 +314,7 @@ class GalleryPage extends StatelessWidget {
             // Content
             Container(
               padding: const EdgeInsets.all(20),
-              color: const Color(0xFFF5F5DC),
+              color: Colors.transparent,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -322,6 +323,7 @@ class GalleryPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                   const Text(
@@ -332,14 +334,13 @@ class GalleryPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  _buildArtistCard('FREDDIE AGUILAR', '100 hours',
-                      'https://via.placeholder.com/50'),
+                  _buildArtistCard(
+                      'The Weeknd', '150 hours', Icons.music_note),
                   const SizedBox(height: 15),
-                  _buildArtistCard('BEN&BEN', '78 hours',
-                      'https://via.placeholder.com/50'),
+                  _buildArtistCard(
+                      'Taylor Swift', '120 hours', Icons.favorite),
                   const SizedBox(height: 15),
-                  _buildArtistCard('CUP OF JOE', '55 hours',
-                      'https://via.placeholder.com/50'),
+                  _buildArtistCard('Post Malone', '95 hours', Icons.album),
                 ],
               ),
             ),
@@ -349,20 +350,19 @@ class GalleryPage extends StatelessWidget {
     );
   }
 
-  Widget _buildArtistCard(String name, String hours, String imageUrl) {
+  Widget _buildArtistCard(String name, String hours, IconData icon) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF1DB954),
+        color: const Color(0xFF282828),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.black, width: 2),
       ),
       child: Row(
         children: [
           CircleAvatar(
             radius: 25,
-            backgroundColor: Colors.grey[300],
-            child: const Icon(Icons.person, color: Colors.grey),
+            backgroundColor: const Color(0xFF121212),
+            child: Icon(icon, color: const Color(0xFF1DB954)),
           ),
           const SizedBox(width: 15),
           Column(
@@ -373,7 +373,7 @@ class GalleryPage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(height: 4),
@@ -381,7 +381,7 @@ class GalleryPage extends StatelessWidget {
                 hours,
                 style: const TextStyle(
                   fontSize: 14,
-                  color: Colors.black87,
+                  color: Colors.grey,
                 ),
               ),
             ],
@@ -399,17 +399,14 @@ class ContactsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.menu, color: Colors.black),
+            icon: const Icon(Icons.menu),
             onPressed: () {},
           ),
         ],
@@ -421,38 +418,41 @@ class ContactsPage extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20),
-              color: const Color(0xFFFFF9C4),
+              color: Colors.transparent,
               child: const Text(
-                'Profile and Contact Page',
+                'Contacts',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             ),
             // Contacts List
             Container(
               padding: const EdgeInsets.all(20),
-              color: const Color(0xFFFFF9C4),
+              color: Colors.transparent,
               child: Column(
                 children: [
                   _buildContactCard(
-                    'Executive President',
-                    'Rayver',
-                    '0988321',
+                  'Chief Vibecoder Officer',
+                  'Rayver',
+                  '@rayver01',
+                    Icons.person,
                   ),
                   const SizedBox(height: 15),
                   _buildContactCard(
-                    'Beki President',
-                    'Chame',
-                    '09234512',
+                  'Head of playlists',
+                  'Chame',
+                  '@chameug',
+                    Icons.playlist_play,
                   ),
                   const SizedBox(height: 15),
                   _buildContactCard(
-                    'Non-Chalant King',
-                    'Sebastian',
-                    '09723618',
+                    'Lead Discovery',
+                  'Sebastian',
+                  '@basteseb',
+                    Icons.search,
                   ),
                 ],
               ),
@@ -463,7 +463,8 @@ class ContactsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildContactCard(String title, String name, String number) {
+  Widget _buildContactCard(
+      String title, String name, String handle, IconData icon) {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(
@@ -472,7 +473,7 @@ class ContactsPage extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: const Color(0xFF1DB954),
+          color: const Color(0xFF282828),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
@@ -483,7 +484,7 @@ class ContactsPage extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: Colors.white,
               ),
             ),
             const SizedBox(height: 15),
@@ -491,8 +492,8 @@ class ContactsPage extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 25,
-                  backgroundColor: Colors.grey[300],
-                  child: const Icon(Icons.person, color: Colors.grey),
+                  backgroundColor: const Color(0xFF121212),
+                  child: Icon(icon, color: const Color(0xFF1DB954)),
                 ),
                 const SizedBox(width: 15),
                 Column(
@@ -503,15 +504,15 @@ class ContactsPage extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      number,
+                      handle,
                       style: const TextStyle(
                         fontSize: 14,
-                        color: Colors.black87,
+                        color: Colors.grey,
                       ),
                     ),
                   ],
@@ -532,17 +533,14 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.menu, color: Colors.black),
+            icon: const Icon(Icons.menu),
             onPressed: () {},
           ),
         ],
@@ -554,8 +552,8 @@ class AboutPage extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                const Color(0xFF2E7D32),
-                const Color(0xFF1B5E20),
+                const Color(0xFF1E3220),
+                const Color(0xFF121212),
               ],
             ),
           ),
@@ -568,13 +566,12 @@ class AboutPage extends StatelessWidget {
                   elevation: 5,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
-                    side: const BorderSide(color: Colors.white, width: 2),
                   ),
                   child: Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1DB954),
+                      color: const Color(0xFF282828),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Text(
@@ -582,7 +579,7 @@ class AboutPage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -595,7 +592,7 @@ class AboutPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'It\'s not just noise. It\'s your noise.',
+                        'This is for the real ones.',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -604,7 +601,7 @@ class AboutPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 15),
                       const Text(
-                        'Let\'s be honest: the world is loud enough already. You don\'t need another app telling you what\'s "trending" or forcing a generic Top 200 list down your throat. You need a place where the music actually fits the mood whether that\'s a high-energy morning commute or that 2:00 AM "why am I still awake" vibe. Spotify was built out of a pretty simple idea: music should be easy. We built this for the people who live in their headphones. No cluttered interfaces, no overwhelming settings just your favorite artists, your weirdly specific playlists, and a discovery engine that actually gets your taste.',
+                        'Forget the noise and the algorithms that don\'t get you. We\'re not about what\'s just "popular"—we\'re about what\'s personal. We created Spotity for the moments that need a soundtrack: the drive to work, the late-night study sessions, the after-parties, and the quiet moments in between. This is a space for the music that makes you, you. No fluff, no distractions. Just a direct line to the artists you love and the new ones you will.',
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.white,
@@ -613,7 +610,7 @@ class AboutPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       const Text(
-                        'Why we\'re here:',
+                        'What we believe in:',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -622,14 +619,14 @@ class AboutPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       _buildBulletPoint(
-                          'The Deep Cuts: We love the hits, but we live for the B-sides and the indie gems you haven\'t found yet.'),
+                          'Beyond the Mainstream: The charts are fine, but the real magic is in the deep tracks and hidden gems.'),
                       _buildBulletPoint(
-                          'Zero Friction: A clean, minimal design that stays out of your way so you can get straight to the play button.'),
+                          'Just Press Play: We keep it simple. Your music is front and center, always.'),
                       _buildBulletPoint(
-                          'Your Vibe, Your Rules: From local legends to global icons, we\'re just here to provide the soundtrack.'),
+                          'Your World, Your Soundtrack: From the icons you grew up with to the indie artists you just discovered, it\'s all here.'),
                       const SizedBox(height: 20),
                       const Text(
-                        'So, thanks for tuning in. We\'re glad you\'re here. Now, turn it up.',
+                        'Thanks for being here. Let\'s make some noise.',
                         style: TextStyle(
                           fontSize: 14,
                           fontStyle: FontStyle.italic,
@@ -684,17 +681,14 @@ class PremiumPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.menu, color: Colors.black),
+            icon: const Icon(Icons.menu),
             onPressed: () {},
           ),
         ],
@@ -711,19 +705,19 @@ class PremiumPage extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    const Color(0xFF8BC34A),
-                    const Color(0xFF689F38),
+                    const Color(0xFF1DB954).withOpacity(0.8),
+                    const Color(0xFF121212),
                   ],
                 ),
               ),
               child: Column(
                 children: [
                   const Text(
-                    'Sponttify',
+                    'Spotity',
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -732,14 +726,14 @@ class PremiumPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
-                      color: Colors.white,
+                      color: Colors.grey,
                     ),
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () => Navigator.pop(context),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black87,
+                      backgroundColor: const Color(0xFF1DB954),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 40, vertical: 12),
                       shape: RoundedRectangleBorder(
@@ -751,6 +745,7 @@ class PremiumPage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -760,41 +755,35 @@ class PremiumPage extends StatelessWidget {
             // Content
             Container(
               padding: const EdgeInsets.all(20),
-              color: const Color(0xFFF5F5DC),
+              color: Colors.transparent,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Product',
+                    'Choose Your Plan',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Text(
-                    'Service',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 20),
                   _buildProductCard(
-                    'Song',
-                    'Hagibis',
-                    'Ed Cauag',
+                    'Individual',
+                    'Ad-free music, offline listening, and more.',
+                    'P149/mo',
                   ),
                   const SizedBox(height: 15),
                   _buildProductCard(
-                    'Album',
-                    'Medyo',
-                    'Kolonyawen',
+                    'Duo',
+                    'For two people who live together.',
+                    'P199/mo',
                   ),
                   const SizedBox(height: 15),
                   _buildProductCard(
-                    'Playlist',
-                    'Favorites',
-                    'Kape',
+                    'Family',
+                    'For up to 6 family members.',
+                    'P299/mo',
                   ),
                 ],
               ),
@@ -805,49 +794,52 @@ class PremiumPage extends StatelessWidget {
     );
   }
 
-  Widget _buildProductCard(String type, String title, String subtitle) {
+  Widget _buildProductCard(String title, String description, String price) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF1DB954),
+        color: const Color(0xFF282828),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.black, width: 2),
       ),
       child: Row(
         children: [
-          CircleAvatar(
+          const CircleAvatar(
             radius: 25,
-            backgroundColor: Colors.grey[300],
-            child: const Icon(Icons.music_note, color: Colors.grey),
+            backgroundColor: Color(0xFF121212),
+            child: Icon(Icons.star, color: Color(0xFF1DB954)),
           ),
           const SizedBox(width: 15),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                type,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.black87,
+                const SizedBox(height: 4),
+                Text(
+                  description,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey,
+                  ),
                 ),
-              ),
-              Text(
-                subtitle,
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.black54,
-                ),
-              ),
-            ],
+              ],
+            ),
+          ),
+          const SizedBox(width: 15),
+          Text(
+            price,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
         ],
       ),
